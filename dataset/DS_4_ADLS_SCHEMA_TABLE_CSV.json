@@ -1,0 +1,38 @@
+{
+	"name": "DS_4_ADLS_SCHEMA_TABLE_CSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_4_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"schema": {
+				"type": "string"
+			},
+			"tablename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat(dataset().tablename,'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().schema",
+					"type": "Expression"
+				},
+				"fileSystem": "tabledata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
