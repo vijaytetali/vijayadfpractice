@@ -1,0 +1,30 @@
+{
+	"name": "DS_4_SQLDB_SCHEMA_TABLE_PARAMS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQLDB_GENERIC",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"schemaname": {
+				"type": "string"
+			},
+			"tablename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().schemaname",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().tablename",
+				"type": "Expression"
+			}
+		}
+	}
+}

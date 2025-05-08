@@ -17,12 +17,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT TABLE_SCHEMA,TABLE_NAME\nFROM INFORMATION_SCHEMA.TABLES\nWHERE TABLE_SCHEMA = 'SalesLT'\nAND TABLE_TYPE = 'BASE TABLE'",
+						"sqlReaderQuery": "SELECT table_schema schemaname,table_name tablename\nFROM INFORMATION_SCHEMA.TABLES\nWHERE TABLE_SCHEMA = 'SalesLT'\nAND TABLE_TYPE = 'BASE TABLE'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "DS_4_SQLDB_SCHEMATABLEPARAMS",
+						"referenceName": "DS_4_SQLDB_GENERIC",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
@@ -69,11 +69,6 @@
 									"type": "DelimitedTextSink",
 									"storeSettings": {
 										"type": "AzureBlobFSWriteSettings"
-									},
-									"formatSettings": {
-										"type": "DelimitedTextWriteSettings",
-										"quoteAllText": true,
-										"fileExtension": ".txt"
 									}
 								},
 								"enableStaging": false,
@@ -88,11 +83,15 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "DS_4_SQLDB_SCHEMATABLE_AS_PARAMS",
+									"referenceName": "DS_4_SQLDB_SCHEMA_TABLE_PARAMS",
 									"type": "DatasetReference",
 									"parameters": {
-										"schema_name": {
+										"schemaname": {
 											"value": "@item().schemaname",
+											"type": "Expression"
+										},
+										"tablename": {
+											"value": "@item().tablename",
 											"type": "Expression"
 										}
 									}
@@ -100,15 +99,15 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "DS_4_ADLS_SCHEMA_TABLE_CSV",
+									"referenceName": "DS_4_ADLS_SCHEMA_TABLE_PARAMS",
 									"type": "DatasetReference",
 									"parameters": {
-										"schema": {
-											"value": "@item().schema_name",
+										"schemaname": {
+											"value": "@item().schemaname",
 											"type": "Expression"
 										},
 										"tablename": {
-											"value": "@item().table_name",
+											"value": "@item().tablename",
 											"type": "Expression"
 										}
 									}

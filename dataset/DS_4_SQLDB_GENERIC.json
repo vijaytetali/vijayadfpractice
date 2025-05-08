@@ -1,0 +1,16 @@
+{
+	"name": "DS_4_SQLDB_GENERIC",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQLDB_GENERIC",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "NewSalesLT",
+			"table": "Product"
+		}
+	}
+}
